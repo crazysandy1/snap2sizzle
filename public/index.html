@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snap2sizzle Enterprise</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <!-- Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <nav class="navbar glass">
+        <a href="/" style="text-decoration: none;">
+            <div class="logo">
+                <i class="fa-solid fa-fire-flame-curved"></i> Snap2Sizzle
+            </div>
+        </a>
+        <div class="nav-controls">
+            <select id="languageSelect" class="lang-select">
+                <option value="English">English</option>
+                <option value="Spanish">Español</option>
+                <option value="French">Français</option>
+                <option value="Hindi">हिंदी</option>
+                <option value="Japanese">日本語</option>
+                <option value="Kannada">ಕನ್ನಡ (Kannada)</option>
+            </select>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Input Section -->
+        <section class="upload-section glass" id="uploadSection">
+            <h1>Discover your Culinary Masterpiece</h1>
+            <p class="subtitle">Upload a food image to instantly generate a professional recipe, discover its origins, and find smart substitutes.</p>
+            
+            <div class="drop-zone" id="dropZone">
+                <img id="imagePreview" src="" alt="Preview" style="display: none;">
+                <div class="drop-zone-content" id="dropContent">
+                    <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                    <p>Drag and drop an image of your food, or click to browse</p>
+                    <p class="text-xs mt-2" style="color: var(--accent-secondary); font-weight: 500;"><i class="fa-solid fa-circle-info"></i> Please upload clear food or dish images only.</p>
+                </div>
+                <input type="file" id="imageInput" accept="image/*" class="hidden">
+            </div>
+
+            <!-- Pre- Generation Options -->
+            <div id="generationOptions" class="generation-options hidden">
+                <div class="input-group">
+                    <label for="numAdults" id="lblInputAdults">👨 Adults:</label>
+                    <input type="number" id="numAdults" min="1" max="20" value="2" class="glass-input">
+                </div>
+                <div class="input-group">
+                    <label for="numKids" id="lblInputKids">🧒 Kids:</label>
+                    <input type="number" id="numKids" min="0" max="20" value="0" class="glass-input">
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <button class="btn-primary" id="analyzeBtn" disabled>
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> <span id="lblAnalyzeBtn">Analyze Dish</span>
+                </button>
+            </div>
+            <p id="errorMsg" class="error-msg hidden"></p>
+        </section>
+
+        <!-- Fullscreen Loading Overlay -->
+        <div id="loadingState" class="loading-overlay hidden">
+            <div class="cooking-spinner"><i class="fa-solid fa-fire-burner bounce-anim"></i></div>
+            <h2 id="loadingTextMsg" class="mt-4">Preparing the kitchen...</h2>
+        </div>
+
+        <!-- Results Section -->
+        <section class="results-section hidden" id="resultsSection">
+            
+            <div class="recipe-header glass">
+                <div class="header-content">
+                    <h2 id="dishNameDisplay">Dish Name</h2>
+                    <div class="badges">
+                        <span class="badge time-badge"><i class="fa-solid fa-user-group"></i> <span id="lblServes" style="margin-right:4px;">Serves:</span> <strong id="servesCount"></strong></span>
+                        <span class="badge origin-badge"><i class="fa-solid fa-earth-americas"></i> <span id="lblOrigin" style="margin-right:4px;">Origin:</span> <strong id="cuisineOrigin"></strong></span>
+                        <span class="badge time-badge"><i class="fa-solid fa-clock"></i> <span id="lblPrep" style="margin-right:4px;">Prep:</span> <strong id="prepTime"></strong></span>
+                        <span class="badge time-badge"><i class="fa-solid fa-fire"></i> <span id="lblCook" style="margin-right:4px;">Cook:</span> <strong id="cookTime"></strong></span>
+                    </div>
+                    <p id="cuisineSpecialty" class="specialty-text"></p>
+                </div>
+            </div>
+
+            <!-- Ingredients & Portions -->
+            <div class="grid layout-grid">
+                <div class="glass ingredients-box">
+                    <div class="box-header">
+                        <h3><i class="fa-solid fa-basket-shopping"></i> Ingredients</h3>
+                    </div>
+                    <div class="ingredients-grid" id="ingredientsList"></div>
+                </div>
+
+                <div class="glass instructions-box">
+                    <h3><i class="fa-solid fa-list-ol"></i> Step-by-Step Instructions</h3>
+                    <ul class="steps-list" id="instructionsList"></ul>
+                </div>
+            </div>
+
+            <!-- Similar Recipes -->
+            <div class="glass similar-box">
+                <h3><i class="fa-solid fa-utensils"></i> Try Similar Recipes</h3>
+                <div class="carousel" id="similarRecipesCarousel"></div>
+            </div>
+
+        </section>
+    </main>
+
+    <script src="./main.js"></script>
+</body>
+</html>
