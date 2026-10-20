@@ -15,7 +15,7 @@
     "express",
     "nodejs"
   ],
-  "author": "Your Name",
+  "author": "Sandeep (crazysandy1)",
   "license": "MIT",
   "dependencies": {
     "@google/generative-ai": "^0.1.0",
